@@ -33,6 +33,7 @@ namespace IdleGame
         {
             if (gw == null)
             {
+                dc = CreateGraphics();
                 gw = new IdleGame.GameWorld(dc, this.DisplayRectangle);
             }
             gw.GameLoop();

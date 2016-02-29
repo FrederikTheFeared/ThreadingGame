@@ -46,9 +46,22 @@ namespace IdleGame
 
         public void Draw()
         {
+            dc.Clear(Color.Beige);
+
             foreach (GameObject gameObject in Objs)
             {
                 gameObject.Draw(dc);
+            }
+#if DEBUG
+            Font f = new Font("Arial", 16);
+            dc.DrawString(""+currentFPS, f, Brushes.Black, 0, 0);
+#endif
+            try
+            {
+                backBuffer.Render();
+            }
+            catch (Exception)
+            {
             }
         }
     }
