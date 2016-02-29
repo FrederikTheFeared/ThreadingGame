@@ -41,7 +41,10 @@ namespace IdleGame
 
         public void Draw()
         {
-
+            foreach (GameObject gameObject in Objs)
+            {
+                gameObject.Draw(dc);
+            }
         }
     }
 }
