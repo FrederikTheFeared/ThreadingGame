@@ -11,8 +11,9 @@ namespace IdleGame
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
         private DateTime endTime;
+        private TimeSpan deltaTime2;
         private int currentFPS;
-        
+
         public static List<GameObject> Objs { get; set; }
 
         public GameWorld(Graphics dc, Rectangle displayRectangle)
@@ -22,6 +23,7 @@ namespace IdleGame
             this.displayRectangle = displayRectangle;
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
+            deltaTime2 = DateTime.Now - DateTime.Now;
         }
 
         public void SetupWorld()
@@ -32,13 +34,18 @@ namespace IdleGame
         {
             DateTime startTime = DateTime.Now;
             TimeSpan deltaTime = startTime - endTime;
-            int milliSeconds = deltaTime.Milliseconds > 0 ? deltaTime.Milliseconds : 1;
-            currentFPS = 1000 / milliSeconds;
+            deltaTime2 = deltaTime2 + deltaTime;
+            endTime = DateTime.Now;
+            if (deltaTime2.Milliseconds >= 100)
+            {
+                int milliSeconds = deltaTime.Milliseconds > 0 ? deltaTime.Milliseconds : 1;
+                currentFPS = 1000 / milliSeconds;
+                deltaTime2 = DateTime.Now - DateTime.Now;
+            }
             Update(currentFPS);
             Draw();
-            endTime = DateTime.Now;
         }
-        
+
         public void Update(float fps)
         {
 
@@ -54,7 +61,7 @@ namespace IdleGame
             }
 #if DEBUG
             Font f = new Font("Arial", 16);
-            dc.DrawString(""+currentFPS, f, Brushes.Black, 0, 0);
+            dc.DrawString("" + currentFPS, f, Brushes.Black, 0, 0);
 #endif
             try
             {
