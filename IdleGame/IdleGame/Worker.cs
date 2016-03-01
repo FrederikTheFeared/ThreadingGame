@@ -12,5 +12,10 @@ namespace IdleGame
         {
 
         }
+
+        public override void OnCollision(GameObject other)
+        {
+
+        }
     }
 }
