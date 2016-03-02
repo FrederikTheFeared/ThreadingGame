@@ -15,31 +15,28 @@ namespace IdleGame
         {
             goldCarry = 50;
             GameWorld.FinishedThreads++;
+            Thread workerThread = new Thread(() => Update(GameWorld.CurrentFPS));
+            GameWorld.Threads.Add(workerThread);
         }
 
         public override void StartThread()
         {
-            GameWorld.Threads.Add(new Thread(() => Update(GameWorld.CurrentFPS)));
             
         }
 
         private void Update(int fps)
         {
-            //while (true)
-            //{
-            //    if (fps == 0)
-            //    {
-            //        fps = 1;
-            //    }
-            //    target = GameWorld.GoldMines[0].Position;
-            //    //target = new Vector2D(0, 0);
-            //    Vector2D velocity = this.position.Subtract(target);
-            //    velocity.Normalize();
-            //    position.X += (1 / fps) * (velocity.X);
-            //    position.Y += (1 / fps) * (velocity.Y);
-            //    Thread.Sleep(10);
-            //}
-            //GameWorld.FinishedThreads++;
+            while (position != target)
+            {
+                target = GameWorld.GoldMines[0].Position;
+                //target = new Vector2D(0, 0);
+                Vector2D velocity = this.position.Subtract(target);
+                velocity.Normalize();
+                position.X += (1 / (GameWorld.CurrentFPS + 1) + 1) * (velocity.X);
+                position.Y += (1 / (GameWorld.CurrentFPS + 1) + 1) * (velocity.Y);
+                Thread.Sleep(10);
+            }
+            GameWorld.FinishedThreads++;
         }
 
         public override void OnCollision(GameObject other)
