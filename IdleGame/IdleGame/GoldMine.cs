@@ -25,7 +25,7 @@ namespace IdleGame
             }
         }
 
-        public GoldMine(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
+        public GoldMine(string imagePath, Vector2D startPosition, int number, int goldDeposit) : base(imagePath, startPosition)
         {
             this.Number = number;
             this.goldDeposit = goldDeposit;

@@ -16,13 +16,12 @@ namespace IdleGame
         private BufferedGraphics backBuffer;
         private DateTime endTime;
         private TimeSpan deltaTime2;
-        private int currentFPS;
+        private static int currentFPS;
         static public int GoldmineAmount = 0;
 
-        public static List<GameObject> Objs { get; set; }
         public static List<Thread> Threads { get; set; }
 
-        internal static List<GameObject> Objs
+        public static List<GameObject> Objs
         {
             get
             {
@@ -69,7 +68,7 @@ namespace IdleGame
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
-            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
+            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
         }
 
         public static int CurrentFPS
@@ -81,16 +80,15 @@ namespace IdleGame
         {
             get { return finishedThreads; }
             set { finishedThreads = value; }
-            Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
         }
 
         public void SetupWorld()
         {
-            
+            Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
         }
 
         public void GoldMineNumberReset(GoldMine removed)

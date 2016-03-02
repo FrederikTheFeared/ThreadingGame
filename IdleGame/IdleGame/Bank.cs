@@ -12,7 +12,7 @@ namespace IdleGame
     {
         private Graphics dc;
         private Vector2D startPosition;
-        public Bank(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
+        public Bank(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             this.startPosition = startPosition;
             this.dc = dc;

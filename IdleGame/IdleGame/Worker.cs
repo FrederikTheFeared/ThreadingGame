@@ -11,7 +11,7 @@ namespace IdleGame
     class Worker : GameObject
     {
         private int goldCarry;
-        public Worker(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
+        public Worker(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             goldCarry = 50;
             GameWorld.Threads.Add(new Thread(() => Update(GameWorld.CurrentFPS)));

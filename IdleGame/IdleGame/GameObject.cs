@@ -5,7 +5,6 @@ namespace IdleGame
 {
     abstract class GameObject
     {
-        private Graphics dc;
         public Image sprite;
         protected Vector2D position;
         protected List<Image> animationFrames = new List<Image>();
@@ -32,7 +31,7 @@ namespace IdleGame
             }
         }
 
-        public GameObject(string imagePath, Vector2D startPosition, Graphics dc)
+        public GameObject(string imagePath, Vector2D startPosition)
         {
             string[] imagePaths = imagePath.Split(';');
             this.animationFrames = new List<Image>();
@@ -43,7 +42,6 @@ namespace IdleGame
             }
             this.sprite = this.animationFrames[0];
             this.position = startPosition;
-            this.dc = dc;
         }
 
         public virtual void Update(float currentFPS)
