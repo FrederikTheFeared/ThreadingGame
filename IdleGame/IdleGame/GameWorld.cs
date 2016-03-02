@@ -24,7 +24,7 @@ namespace IdleGame
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
-            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
         }
 
         public void SetupWorld()
@@ -33,6 +33,10 @@ namespace IdleGame
         }
         public void GameLoop()
         {
+            foreach (GameObject gameObject in Objs)
+            {
+
+            }
             DateTime startTime = DateTime.Now;
             TimeSpan deltaTime = startTime - endTime;
             deltaTime2 = deltaTime2 + deltaTime;
