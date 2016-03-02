@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace IdleGame
 {
     class GoldMine : GameObject
     {
+        private Object mineLock = new Object();
         private int number;
         private int goldDeposit;
         public int Number
@@ -29,6 +30,12 @@ namespace IdleGame
             this.Number = number;
             this.goldDeposit = goldDeposit;
             GameWorld.GoldmineAmount++;
+            GameWorld.GoldMines.Add(this);
+        }
+
+        public override void StartThread()
+        {
+            
         }
 
         public override void OnCollision(GameObject other)
@@ -36,18 +43,23 @@ namespace IdleGame
 
         }
 
+
         public int Mining(int amount)
         {
-            if (amount <= goldDeposit)
+            lock (mineLock)
             {
-                goldDeposit = goldDeposit - amount;
-                return amount;
-            }
-            else
-            {
-                int maxAmount = goldDeposit;
-                goldDeposit = goldDeposit - maxAmount;
-                return maxAmount;
+                if (amount <= goldDeposit)
+                {
+                    Thread.Sleep(10000);
+                    goldDeposit = goldDeposit - amount;
+                    return amount;
+                }
+                else
+                {
+                    int maxAmount = goldDeposit;
+                    goldDeposit = goldDeposit - maxAmount;
+                    return maxAmount;
+                }
             }
         }
         public override void Update(float currentFPS)

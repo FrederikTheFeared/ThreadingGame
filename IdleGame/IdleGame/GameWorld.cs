@@ -19,7 +19,11 @@ namespace IdleGame
         private static int currentFPS;
         static public int GoldmineAmount = 0;
 
-        public static List<Thread> Threads { get; set; }
+        public static List<Thread> Threads
+        {
+            get { return threads; }
+            set { threads = value; }
+        }
 
         public static List<GameObject> Objs
         {
@@ -63,12 +67,11 @@ namespace IdleGame
         public GameWorld(Graphics dc, Rectangle displayRectangle)
         {
             Objs = Objs;
-            SetupWorld();
             this.displayRectangle = displayRectangle;
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
-            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            SetupWorld();
         }
 
         public static int CurrentFPS
@@ -84,11 +87,12 @@ namespace IdleGame
 
         public void SetupWorld()
         {
-            Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            //Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
+            Objs.Add(new Worker("testPlayer.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
         }
 
         public void GoldMineNumberReset(GoldMine removed)
@@ -133,14 +137,18 @@ namespace IdleGame
 
         public void Update(float fps)
         {
-            if (finishedThreads >= threads.Count)
+            if (FinishedThreads >= threads.Count)
             {
+                foreach (GameObject obj in objs)
+                {
+                    obj.StartThread();
+                }
                 foreach (Thread thread in threads)
                 {
                     thread.Start();
                 }
-                finishedThreads = 0;
             }
+            threads.Clear();
         }
 
         public void Draw()
