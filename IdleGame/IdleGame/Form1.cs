@@ -38,5 +38,20 @@ namespace IdleGame
             }
             gw.GameLoop();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            int number = 1;
+            foreach ( GoldMine goldmine in GameWorld.GoldMines)
+            {
+                number++;
+            }
+            GameWorld.Objs.Add(new GoldMine("mine.png", new Vector2D(-200, 0), number, 500));
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            GameWorld.Objs.Add(new Worker("testPlayer.png", new Vector2D(DisplayRectangle.Width / 2, DisplayRectangle.Height / 2)));
+        }
     }
 }

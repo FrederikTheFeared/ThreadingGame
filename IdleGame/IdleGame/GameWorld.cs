@@ -18,6 +18,7 @@ namespace IdleGame
         private TimeSpan deltaTime2;
         private static int currentFPS;
         static public int GoldmineAmount = 0;
+        private int gold = 50;
 
         public static List<Thread> Threads
         {
@@ -159,9 +160,10 @@ namespace IdleGame
             {
                 gameObject.Draw(dc);
             }
-#if DEBUG
             Font f = new Font("Arial", 16);
-            dc.DrawString("" + currentFPS, f, Brushes.Black, 0, 0);
+            dc.DrawString("Gold: " + gold, f, Brushes.Black, 100,5);
+#if DEBUG
+            dc.DrawString(" " + currentFPS, f, Brushes.Black, 0, 0);
 #endif
             try
             {
