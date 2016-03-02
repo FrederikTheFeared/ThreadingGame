@@ -15,29 +15,63 @@ namespace IdleGame
         private TimeSpan deltaTime2;
         private int currentFPS;
 
-        public static List<GameObject> Objs { get; set; }
-        public static List<GameObject> RemoveObjs { get; set; }
+        internal static List<GameObject> Objs
+        {
+            get
+            {
+                return objs;
+            }
+
+            set
+            {
+                objs = value;
+            }
+        }
+
+        internal static List<GameObject> RemoveObjs
+        {
+            get
+            {
+                return removeObjs;
+            }
+
+            set
+            {
+                removeObjs = value;
+            }
+        }
 
         public GameWorld(Graphics dc, Rectangle displayRectangle)
         {
-            Objs = objs;
+            Objs = Objs;
             SetupWorld();
             this.displayRectangle = displayRectangle;
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
-            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
+            Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
         }
 
         public void SetupWorld()
         {
             
         }
+
+        public void GoldMineNumberReset()
+        {
+
+        }
         public void GameLoop()
         {
-            foreach (GameObject gameObject in RemoveObjs)
+            int j = RemoveObjs.Count;
+            for (int i = 0; i < j; i++)
             {
-                Objs.Remove(gameObject);
+                if(RemoveObjs[i] is GoldMine)
+                {
+                    
+                }
+                Objs.Remove(RemoveObjs[i]);
             }
             RemoveObjs.Clear();
             DateTime startTime = DateTime.Now;

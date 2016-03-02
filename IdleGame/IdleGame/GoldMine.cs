@@ -37,7 +37,7 @@ namespace IdleGame
 
         public int Mining(int amount)
         {
-            if(amount <= goldDeposit)
+            if (amount <= goldDeposit)
             {
                 goldDeposit = goldDeposit - amount;
                 return amount;
@@ -51,7 +51,7 @@ namespace IdleGame
         }
         public override void Update(float currentFPS)
         {
-            if(goldDeposit == 0)
+            if (goldDeposit == 0)
             {
                 GameWorld.RemoveObjs.Add(this);
             }
@@ -61,8 +61,13 @@ namespace IdleGame
         public override void Draw(Graphics dc)
         {
             dc.TranslateTransform(400, 300);
-            
-            
+            float angle = 360 / number;
+            dc.RotateTransform(angle);
+            dc.DrawImage(sprite, position.X, position.Y, sprite.Width, sprite.Height);
+            dc.DrawRectangle(new Pen(Brushes.Red), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+            dc.ResetTransform();
+
+
         }
 
     }
