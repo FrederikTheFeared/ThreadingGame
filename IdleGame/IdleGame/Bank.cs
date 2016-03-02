@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace IdleGame
 {
@@ -11,7 +12,7 @@ namespace IdleGame
     {
         private Graphics dc;
         private Vector2D startPosition;
-        public Bank(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition)
+        public Bank(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
         {
             this.startPosition = startPosition;
             this.dc = dc;

@@ -3,16 +3,24 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
+using System.Drawing;
 
 namespace IdleGame
 {
     class Worker : GameObject
     {
         private int goldCarry;
-        public Worker(string imagePath, Vector2D startPosition) : base (imagePath, startPosition)
+        public Worker(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
         {
             goldCarry = 50;
+            GameWorld.Threads.Add(new Thread(() => Update(GameWorld.CurrentFPS)));
+        }
+
+        private void Update(int fps)
+        {
+
+            GameWorld.FinishedThreads++;
         }
 
         public override void OnCollision(GameObject other)

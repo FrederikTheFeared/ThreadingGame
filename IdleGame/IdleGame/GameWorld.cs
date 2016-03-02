@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-
+using System.Threading;
 namespace IdleGame
 {
     class GameWorld
     {
         private static List<GameObject> objs = new List<GameObject>();
+        private static List<Thread> threads = new List<Thread>();
+        private static int finishedThreads = 0; 
         private static List<GameObject> removeObjs = new List<GameObject>();
         private static List<GoldMine> goldMines = new List<GoldMine>();
         private Graphics dc;
@@ -16,6 +18,9 @@ namespace IdleGame
         private TimeSpan deltaTime2;
         private int currentFPS;
         static public int GoldmineAmount = 0;
+
+        public static List<GameObject> Objs { get; set; }
+        public static List<Thread> Threads { get; set; }
 
         internal static List<GameObject> Objs
         {
@@ -64,6 +69,18 @@ namespace IdleGame
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
+            objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
+        }
+
+        public static int CurrentFPS
+        {
+            get { return currentFPS; }
+        }
+
+        public static int FinishedThreads
+        {
+            get { return finishedThreads; }
+            set { finishedThreads = value; }
             Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
@@ -83,7 +100,7 @@ namespace IdleGame
                 if(goldMine != removed)
                 {
                     if (goldMine.Number > removed.Number)
-                    {
+        {
                         goldMine.Number = goldMine.Number - 1;
                     }
                 }
@@ -118,7 +135,14 @@ namespace IdleGame
 
         public void Update(float fps)
         {
-
+            if (finishedThreads >= threads.Count)
+            {
+                foreach (Thread thread in threads)
+                {
+                    thread.Start();
+                }
+                finishedThreads = 0;
+            }
         }
 
         public void Draw()

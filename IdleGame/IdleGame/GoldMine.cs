@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace IdleGame
 {
@@ -24,7 +25,7 @@ namespace IdleGame
             }
         }
 
-        public GoldMine(string imagePath, Vector2D startPosition, int number, int goldDeposit) : base(imagePath, startPosition)
+        public GoldMine(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
         {
             this.Number = number;
             this.goldDeposit = goldDeposit;
