@@ -60,8 +60,9 @@ namespace IdleGame
 
         public override void Draw(Graphics dc)
         {
-
-            base.Draw(dc);
+            dc.TranslateTransform(400, 300);
+            
+            
         }
 
     }
