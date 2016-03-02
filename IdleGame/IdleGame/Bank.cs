@@ -4,18 +4,15 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Drawing;
 
 namespace IdleGame
 {
     class Bank : GameObject
     {
-        private Graphics dc;
         private Vector2D startPosition;
         public Bank(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             this.startPosition = startPosition;
-            this.dc = dc;
         }
         public override void OnCollision(GameObject other)
         {
