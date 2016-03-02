@@ -28,6 +28,7 @@ namespace IdleGame
         {
             this.Number = number;
             this.goldDeposit = goldDeposit;
+            GameWorld.GoldmineAmount++;
         }
 
         public override void OnCollision(GameObject other)
@@ -61,10 +62,12 @@ namespace IdleGame
         public override void Draw(Graphics dc)
         {
             dc.TranslateTransform(400, 300);
-            float angle = 360 / number;
+            float angle = (360 / GameWorld.GoldmineAmount)*Number;
             dc.RotateTransform(angle);
-            dc.DrawImage(sprite, position.X, position.Y, sprite.Width, sprite.Height);
-            dc.DrawRectangle(new Pen(Brushes.Red), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+            dc.TranslateTransform(position.X, position.Y);
+            dc.RotateTransform(-angle);
+            dc.DrawImage(sprite, 0 - sprite.Width / 2, 0 - sprite.Height / 2, sprite.Width, sprite.Height);
+            dc.DrawRectangle(new Pen(Brushes.Red), 0 - sprite.Width / 2, 0 - sprite.Height / 2, CollisionBox.Width, CollisionBox.Height);
             dc.ResetTransform();
 
 

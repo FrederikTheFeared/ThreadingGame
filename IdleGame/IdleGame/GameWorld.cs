@@ -8,12 +8,14 @@ namespace IdleGame
     {
         private static List<GameObject> objs = new List<GameObject>();
         private static List<GameObject> removeObjs = new List<GameObject>();
+        private static List<GoldMine> goldMines = new List<GoldMine>();
         private Graphics dc;
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
         private DateTime endTime;
         private TimeSpan deltaTime2;
         private int currentFPS;
+        static public int GoldmineAmount = 0;
 
         internal static List<GameObject> Objs
         {
@@ -41,6 +43,19 @@ namespace IdleGame
             }
         }
 
+        internal static List<GoldMine> GoldMines
+        {
+            get
+            {
+                return goldMines;
+            }
+
+            set
+            {
+                goldMines = value;
+            }
+        }
+
         public GameWorld(Graphics dc, Rectangle displayRectangle)
         {
             Objs = Objs;
@@ -51,6 +66,9 @@ namespace IdleGame
             deltaTime2 = DateTime.Now - DateTime.Now;
             Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2), dc));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
+            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
         }
 
         public void SetupWorld()
@@ -58,9 +76,18 @@ namespace IdleGame
             
         }
 
-        public void GoldMineNumberReset()
+        public void GoldMineNumberReset(GoldMine removed)
         {
-
+            foreach (GoldMine goldMine in goldMines)
+            {
+                if(goldMine != removed)
+                {
+                    if (goldMine.Number > removed.Number)
+                    {
+                        goldMine.Number = goldMine.Number - 1;
+                    }
+                }
+            }
         }
         public void GameLoop()
         {
@@ -69,7 +96,8 @@ namespace IdleGame
             {
                 if(RemoveObjs[i] is GoldMine)
                 {
-                    
+                    GoldMineNumberReset(RemoveObjs[i] as GoldMine);
+                    GoldmineAmount--;
                 }
                 Objs.Remove(RemoveObjs[i]);
             }
