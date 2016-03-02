@@ -35,7 +35,7 @@ namespace IdleGame
 
         }
 
-        public int mining(int amount)
+        public int Mining(int amount)
         {
             if(amount <= goldDeposit)
             {
@@ -53,7 +53,7 @@ namespace IdleGame
         {
             if(goldDeposit == 0)
             {
-
+                GameWorld.RemoveObjs.Add(this);
             }
             base.Update(currentFPS);
         }

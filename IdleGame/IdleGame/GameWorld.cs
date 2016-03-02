@@ -6,7 +6,8 @@ namespace IdleGame
 {
     class GameWorld
     {
-        public static List<GameObject> objs = new List<GameObject>();
+        private static List<GameObject> objs = new List<GameObject>();
+        private static List<GameObject> removeObjs = new List<GameObject>();
         private Graphics dc;
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
@@ -15,6 +16,7 @@ namespace IdleGame
         private int currentFPS;
 
         public static List<GameObject> Objs { get; set; }
+        public static List<GameObject> RemoveObjs { get; set; }
 
         public GameWorld(Graphics dc, Rectangle displayRectangle)
         {
@@ -33,10 +35,11 @@ namespace IdleGame
         }
         public void GameLoop()
         {
-            foreach (GameObject gameObject in Objs)
+            foreach (GameObject gameObject in RemoveObjs)
             {
-
+                Objs.Remove(gameObject);
             }
+            RemoveObjs.Clear();
             DateTime startTime = DateTime.Now;
             TimeSpan deltaTime = startTime - endTime;
             deltaTime2 = deltaTime2 + deltaTime;
