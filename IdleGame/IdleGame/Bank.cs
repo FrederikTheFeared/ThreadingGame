@@ -17,6 +17,11 @@ namespace IdleGame
             this.startPosition = startPosition;
             this.dc = dc;
         }
+
+        public override void StartThread()
+        {
+            
+        }
         public override void OnCollision(GameObject other)
         {
             

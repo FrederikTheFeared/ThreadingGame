@@ -44,6 +44,8 @@ namespace IdleGame
             this.position = startPosition;
         }
 
+        public abstract void StartThread();
+
         public virtual void Update(float currentFPS)
         {
             CheckCollosion();
