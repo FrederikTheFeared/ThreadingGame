@@ -87,6 +87,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="testBomb.png">
+	  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="mine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
