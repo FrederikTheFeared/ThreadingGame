@@ -9,15 +9,25 @@ namespace IdleGame
 {
     class Worker : GameObject
     {
-        public Worker(string imagePath, Vector2D startPosition, Graphics dc) : base (imagePath, startPosition, dc)
+        private int goldCarry;
+        public Worker(string imagePath, Vector2D startPosition, Graphics dc) : base(imagePath, startPosition, dc)
         {
-            GameWorld.Threads.Add(new Thread(() => Update(GameWorld.CurrentFPS))); 
+            goldCarry = 50;
+            GameWorld.Threads.Add(new Thread(() => Update(GameWorld.CurrentFPS)));
         }
 
         private void Update(int fps)
         {
-            
+
             GameWorld.FinishedThreads++;
+        }
+
+        public override void OnCollision(GameObject other)
+        {
+            if(other is GoldMine)
+            {
+                (other as GoldMine).Mining(goldCarry);
+            }
         }
     }
 }

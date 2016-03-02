@@ -83,8 +83,6 @@ namespace IdleGame
             }
         }
 
-        protected virtual void OnCollision(GameObject other)
-        {
-        }
+        public abstract void OnCollision(GameObject other);
     }
 }
