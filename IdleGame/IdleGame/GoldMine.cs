@@ -50,7 +50,7 @@ namespace IdleGame
             {
                 if (amount <= goldDeposit)
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(1000);
                     goldDeposit = goldDeposit - amount;
                     return amount;
                 }
