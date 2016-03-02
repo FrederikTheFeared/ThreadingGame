@@ -41,14 +41,17 @@ namespace IdleGame
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            int number = 0;
+            int number = 1;
             foreach ( GoldMine goldmine in GameWorld.GoldMines)
             {
                 number++;
             }
-            GoldMine goldy = new GoldMine("mine.png", new Vector2D(-200, 0), number, 500);
-            GameWorld.Objs.Add(goldy);
-            GameWorld.GoldMines.Add(goldy);
+            GameWorld.Objs.Add(new GoldMine("mine.png", new Vector2D(-200, 0), number, 500));
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            GameWorld.Objs.Add(new Worker("testPlayer.png", new Vector2D(DisplayRectangle.Width / 2, DisplayRectangle.Height / 2)));
         }
     }
 }
