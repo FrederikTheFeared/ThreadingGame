@@ -88,12 +88,12 @@ namespace IdleGame
 
         public void SetupWorld()
         {
-            //Objs.Add(new Bank("testExplosion.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            Objs.Add(new Bank("testExplosion.png", new Vector2D(0,0)));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
-            Objs.Add(new Worker("testPlayer.png", new Vector2D(displayRectangle.Width / 2, displayRectangle.Height / 2)));
+            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0)));
         }
 
         public void GoldMineNumberReset(GoldMine removed)

@@ -51,7 +51,7 @@ namespace IdleGame
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            GameWorld.Objs.Add(new Worker("testPlayer.png", new Vector2D(DisplayRectangle.Width / 2, DisplayRectangle.Height / 2)));
+            GameWorld.Objs.Add(new Worker("testPlayer.png", new Vector2D(0,0)));
         }
     }
 }
