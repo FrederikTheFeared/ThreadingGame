@@ -14,7 +14,6 @@ namespace IdleGame
         private GameObject targetBank;
         private bool targetingBank = false;
         private int rotationNumber;
-        private int currentlyCarrying = 0;
         public Worker(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             goldCarry = 50;
@@ -54,8 +53,6 @@ namespace IdleGame
                 {
                     if(targetingBank == false)
                     {
-                        GoldMine newTarget = (GoldMine)target;
-                        currentlyCarrying = newTarget.Mining(goldCarry);
                         foreach (GameObject gameObject in GameWorld.Objs)
                         {
                             if(gameObject is Bank)
@@ -68,8 +65,6 @@ namespace IdleGame
                     else
                     {
                         target = GameWorld.GoldMines[0];
-                        GameWorld.Gold += currentlyCarrying;
-                        currentlyCarrying = 0;
                         targetingBank = false;
                     }
 
