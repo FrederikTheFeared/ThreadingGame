@@ -9,12 +9,21 @@ namespace IdleGame
 {
     class Bank : GameObject
     {
+        private int gold;
         private Vector2D startPosition;
         public Bank(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             this.startPosition = startPosition;
         }
-
+        public void Deposit(int gold)
+        {
+            this.gold += gold;
+            if (this.gold >= 250)
+            {
+                GameWorld.AddObjs.Add(new Worker("testPlayer.png", new Vector2D(0, 0)));
+                this.gold -= 250;
+            }
+        }
         public override void StartThread()
         {
             
