@@ -89,7 +89,7 @@ namespace IdleGame
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
-            background = new Background("testBomb.png");
+            background = new Background("sprite/Background.png");
             SetupWorld();
         }
 
