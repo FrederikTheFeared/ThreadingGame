@@ -17,6 +17,7 @@ namespace IdleGame
         private Graphics dc;
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
+        private Background background;
         private DateTime endTime;
         private TimeSpan deltaTime2;
         private static int currentFPS;
@@ -88,6 +89,7 @@ namespace IdleGame
             this.backBuffer = BufferedGraphicsManager.Current.Allocate(dc, displayRectangle);
             this.dc = backBuffer.Graphics;
             deltaTime2 = DateTime.Now - DateTime.Now;
+            background = new Background("sprite/Background.png");
             SetupWorld();
         }
 
@@ -180,7 +182,7 @@ namespace IdleGame
         public void Draw()
         {
             dc.Clear(Color.Beige);
-
+            background.Draw(dc);
             foreach (GameObject gameObject in Objs)
             {
                 gameObject.Draw(dc);
