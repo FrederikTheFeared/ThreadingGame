@@ -46,12 +46,32 @@ namespace IdleGame
             {
                 number++;
             }
-            GameWorld.Objs.Add(new GoldMine("mine.png", new Vector2D(-200, 0), number, 500));
+            foreach (GameObject gameObject in GameWorld.Objs)
+            {
+                if(gameObject is Bank)
+                {
+                    if((gameObject as Bank).Gold >= 100)
+                    {
+                        GameWorld.AddObjs.Add(new GoldMine("mine.png", new Vector2D(-200, 0), number, 500));
+                        (gameObject as Bank).Gold -= 100;
+                    }
+                }
+            }
         }
 
         private void pictureBox2_Click(object sender, EventArgs e)
         {
-            GameWorld.Objs.Add(new Worker("testPlayer.png", new Vector2D(0,0), 50));
+            foreach (GameObject gameObject in GameWorld.Objs)
+            {
+                if(gameObject is Bank)
+                {
+                    if((gameObject as Bank).Gold >= 250)
+                    {
+                        GameWorld.AddObjs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
+                        (gameObject as Bank).Gold -= 250;
+                    }
+                }
+            }
         }
     }
 }
