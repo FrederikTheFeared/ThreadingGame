@@ -13,6 +13,7 @@ namespace IdleGame
         private static List<GameObject> addObjs = new List<GameObject>();
         private static List<GoldMine> goldMines = new List<GoldMine>();
         private static List<Worker> workers = new List<Worker>();
+        private Bank bank;
         private Graphics dc;
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
@@ -20,7 +21,6 @@ namespace IdleGame
         private TimeSpan deltaTime2;
         private static int currentFPS;
         static public int GoldmineAmount = 0;
-        private static int gold = 0;
 
         public static string debug = "debug";
 
@@ -91,12 +91,6 @@ namespace IdleGame
             SetupWorld();
         }
 
-        public static int Gold
-        {
-            get { return gold; }
-            set { gold = value; }
-        }
-
         public static int CurrentFPS
         {
             get { return currentFPS; }
@@ -110,7 +104,8 @@ namespace IdleGame
 
         public void SetupWorld()
         {
-            Objs.Add(new Bank("testExplosion.png", new Vector2D(0,0)));
+            bank = new Bank("testExplosion.png", new Vector2D(0,0));
+            Objs.Add(bank);
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
@@ -131,6 +126,7 @@ namespace IdleGame
                 }
             }
         }
+
         public void GameLoop()
         {
             int j = RemoveObjs.Count;
@@ -190,7 +186,7 @@ namespace IdleGame
                 gameObject.Draw(dc);
             }
             Font f = new Font("Arial", 16);
-            dc.DrawString("Gold: " + gold, f, Brushes.Black, 100,5);
+            dc.DrawString("Gold: " + bank.Gold, f, Brushes.Black, 100,5);
 #if DEBUG
             dc.DrawString(" " + currentFPS, f, Brushes.Black, 0, 0);
             dc.DrawString(debug, f, Brushes.Black, 0, 20);

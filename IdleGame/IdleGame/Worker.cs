@@ -14,7 +14,10 @@ namespace IdleGame
         private GameObject target;
         private GameObject targetBank;
         private GameObject targetMine;
+        private Thread workerThread;
+        private Thread death;
         private bool targetingBank = false;
+        private bool whileLoop = true;
         private int rotationNumber;
         private Random rnd = new Random();
 
@@ -22,7 +25,9 @@ namespace IdleGame
         {
             this.goldCarry = goldCarry;
             GameWorld.FinishedThreads++;
-            Thread workerThread = new Thread(() => Update(GameWorld.CurrentFPS));
+            workerThread = new Thread(() => Update(GameWorld.CurrentFPS));
+            death = new Thread(Die);
+            death.Start();
             GameWorld.Workers.Add(this);
             GameWorld.Threads.Add(workerThread);
             targetMine = (GameWorld.GoldMines[rnd.Next(GameWorld.GoldMines.Count)]);
@@ -43,7 +48,7 @@ namespace IdleGame
 
         private void Update(int fps)
         {
-            while (position != target.Position)
+            while (whileLoop)
             {
                 if (target == null)
                 {
@@ -71,7 +76,7 @@ namespace IdleGame
                     }
                     else
                     {
-                        GameWorld.Gold += gold;
+                        (targetBank as Bank).Gold += gold;
                         (target as Bank).Deposit(gold);
                         gold = 0;
                         targetMine = (GameWorld.GoldMines[rnd.Next(GameWorld.GoldMines.Count)]);
@@ -90,7 +95,12 @@ namespace IdleGame
             GameWorld.FinishedThreads++;
         }
 
-        
+        public void Die()
+        {
+            Thread.Sleep(100000);
+            whileLoop = false;
+            GameWorld.RemoveObjs.Add(this);
+        }
 
         public override void Update(float currentFPS)
         {

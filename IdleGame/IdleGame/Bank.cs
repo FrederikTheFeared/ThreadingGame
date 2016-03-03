@@ -12,6 +12,13 @@ namespace IdleGame
         private Semaphore bankSemaphore = new Semaphore(0, 5);
         private int gold;
         private Vector2D startPosition;
+
+        public int Gold
+        {
+            get { return gold; }
+            set { gold = value; }
+        }
+
         public Bank(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
         {
             this.startPosition = startPosition;
@@ -22,7 +29,7 @@ namespace IdleGame
             bankSemaphore.WaitOne();
             Thread.Sleep(1000);
             this.gold += gold;
-            if (this.gold >= 250)
+            if (this.gold >= 1000)
             {
                 GameWorld.AddObjs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
                 this.gold -= 250;
