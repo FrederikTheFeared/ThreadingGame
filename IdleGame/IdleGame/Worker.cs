@@ -18,9 +18,9 @@ namespace IdleGame
         private int rotationNumber;
         private Random rnd = new Random();
 
-        public Worker(string imagePath, Vector2D startPosition) : base(imagePath, startPosition)
+        public Worker(string imagePath, Vector2D startPosition, int goldCarry) : base(imagePath, startPosition)
         {
-            goldCarry = 50;
+            this.goldCarry = goldCarry;
             GameWorld.FinishedThreads++;
             Thread workerThread = new Thread(() => Update(GameWorld.CurrentFPS));
             GameWorld.Workers.Add(this);
@@ -89,6 +89,8 @@ namespace IdleGame
             }
             GameWorld.FinishedThreads++;
         }
+
+        
 
         public override void Update(float currentFPS)
         {

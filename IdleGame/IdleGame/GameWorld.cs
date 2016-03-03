@@ -115,7 +115,7 @@ namespace IdleGame
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
-            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0)));
+            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
         }
 
         public void GoldMineNumberReset(GoldMine removed)

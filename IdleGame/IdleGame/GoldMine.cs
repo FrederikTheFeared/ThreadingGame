@@ -50,13 +50,13 @@ namespace IdleGame
             {
                 if (amount < goldDeposit)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
                     goldDeposit = goldDeposit - amount;
                     return amount;
                 }
                 else if (goldDeposit > 0)
                 {
-                    Thread.Sleep(1000);
+                    Thread.Sleep(5000);
                     int maxAmount = goldDeposit;
                     goldDeposit = goldDeposit - maxAmount;
                     GameWorld.RemoveObjs.Add(this);
