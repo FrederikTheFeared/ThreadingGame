@@ -90,13 +90,6 @@ namespace IdleGame
             GameWorld.FinishedThreads++;
         }
 
-        public override void OnCollision(GameObject other)
-        {
-            if(other is GoldMine)
-            {
-                (other as GoldMine).Mining(goldCarry);
-            }
-        }
         public override void Update(float currentFPS)
         {
 

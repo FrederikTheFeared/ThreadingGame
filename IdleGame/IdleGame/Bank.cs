@@ -28,10 +28,6 @@ namespace IdleGame
         {
             
         }
-        public override void OnCollision(GameObject other)
-        {
-            
-        }
         public override void Update(float currentFPS)
         {
             base.Update(currentFPS);

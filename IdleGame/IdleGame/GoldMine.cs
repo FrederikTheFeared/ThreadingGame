@@ -44,12 +44,6 @@ namespace IdleGame
             
         }
 
-        public override void OnCollision(GameObject other)
-        {
-            GameWorld.debug = "Collision";
-        }
-
-
         public int Mining(int amount)
         {
             lock (mineLock)
