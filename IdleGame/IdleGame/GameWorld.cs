@@ -104,13 +104,13 @@ namespace IdleGame
 
         public void SetupWorld()
         {
-            bank = new Bank("testExplosion.png", new Vector2D(0,0));
+            bank = new Bank("sprite/Bank.png", new Vector2D(0,0));
             Objs.Add(bank);
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
-            Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
-            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
+            Objs.Add(new GoldMine("sprite/mine.png", new Vector2D(-200, 0), 1, 500));
+            Objs.Add(new GoldMine("sprite/mine.png", new Vector2D(-200, 0), 2, 500));
+            Objs.Add(new GoldMine("sprite/mine.png", new Vector2D(-200, 0), 3, 500));
+            Objs.Add(new GoldMine("sprite/mine.png", new Vector2D(-200, 0), 4, 500));
+            Objs.Add(new Worker("sprite/WorkerFrontSprite1.png;sprite/WorkerFrontSprite2.png;sprite/WorkerSpriteFront3.png", new Vector2D(0, 0), 50));
         }
 
         public void GoldMineNumberReset(GoldMine removed)

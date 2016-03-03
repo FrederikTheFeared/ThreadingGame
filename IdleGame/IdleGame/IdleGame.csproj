@@ -86,15 +86,25 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="sprite\Background.png" />
-    <Content Include="sprite\Bank.png" />
-    <Content Include="sprite\WorkerFrontSprite1.png" />
-    <Content Include="sprite\WorkerFrontSprite2.png" />
-    <Content Include="sprite\WorkerSpriteFront3.png" />
-    <Content Include="testBomb.png">
+    <Content Include="sprite\Background.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="mine.png">
+    <Content Include="sprite\Bank.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprite\mine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprite\WorkerFrontSprite1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprite\WorkerFrontSprite2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="sprite\WorkerSpriteFront3.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="testBomb.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="testExplosion.png">

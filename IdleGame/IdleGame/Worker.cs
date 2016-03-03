@@ -108,10 +108,13 @@ namespace IdleGame
         }
         public override void Draw(Graphics dc)
         {
+            float angle = (360 / GameWorld.GoldmineAmount) * rotationNumber;
             dc.TranslateTransform(400, 300);
-            dc.RotateTransform((360 / GameWorld.GoldmineAmount * rotationNumber));
-            dc.DrawImage(sprite, position.X - sprite.Width / 2, position.Y - sprite.Height / 2, sprite.Width, sprite.Height);
-            dc.DrawRectangle(new Pen(Brushes.Red), position.X - sprite.Width / 2, position.Y - sprite.Height / 2, CollisionBox.Width, CollisionBox.Height);
+            dc.RotateTransform(angle);
+            dc.TranslateTransform(position.X, position.Y);
+            dc.RotateTransform(-angle);
+            dc.DrawImage(sprite, 0 - sprite.Width / 2, 0 - sprite.Height / 2, sprite.Width, sprite.Height);
+            dc.DrawRectangle(new Pen(Brushes.Red), 0 - sprite.Width / 2, 0 - sprite.Height / 2, CollisionBox.Width, CollisionBox.Height);
             dc.ResetTransform();
         }
     }
