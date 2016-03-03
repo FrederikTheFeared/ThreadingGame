@@ -48,7 +48,7 @@ namespace IdleGame
 
         public virtual void Update(float currentFPS)
         {
-            CheckCollosion();
+            
         }
 
         public virtual void Draw(Graphics dc)
@@ -56,33 +56,5 @@ namespace IdleGame
             dc.DrawImage(sprite, position.X, position.Y, sprite.Width, sprite.Height);
             dc.DrawRectangle(new Pen(Brushes.Red), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
         }
-
-        public bool IsCollidingWith(GameObject other)
-        {
-            if ((CollisionBox.IntersectsWith(other.CollisionBox)))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        private void CheckCollosion()
-        {
-            foreach (GameObject go in GameWorld.Objs)
-            {
-                if (go != this)
-                {
-                    if (this.IsCollidingWith(go))
-                    {
-                        OnCollision(go);
-                    }
-                }
-            }
-        }
-
-        public abstract void OnCollision(GameObject other);
     }
 }
