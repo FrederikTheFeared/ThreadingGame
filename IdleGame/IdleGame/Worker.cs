@@ -76,7 +76,6 @@ namespace IdleGame
                     }
                     else
                     {
-                        (targetBank as Bank).Gold += gold;
                         (target as Bank).Deposit(gold);
                         gold = 0;
                         targetMine = (GameWorld.GoldMines[rnd.Next(GameWorld.GoldMines.Count)]);
