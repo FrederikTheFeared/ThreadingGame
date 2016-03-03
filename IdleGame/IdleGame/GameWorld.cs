@@ -10,7 +10,10 @@ namespace IdleGame
         private static List<Thread> threads = new List<Thread>();
         private static int finishedThreads = 0; 
         private static List<GameObject> removeObjs = new List<GameObject>();
+        private static List<GameObject> addObjs = new List<GameObject>();
         private static List<GoldMine> goldMines = new List<GoldMine>();
+        private static List<Worker> workers = new List<Worker>();
+        private Bank bank;
         private Graphics dc;
         private Rectangle displayRectangle;
         private BufferedGraphics backBuffer;
@@ -18,7 +21,8 @@ namespace IdleGame
         private TimeSpan deltaTime2;
         private static int currentFPS;
         static public int GoldmineAmount = 0;
-        private int gold = 50;
+
+        public static string debug = "debug";
 
         public static List<Thread> Threads
         {
@@ -52,6 +56,12 @@ namespace IdleGame
             }
         }
 
+        internal static List<GameObject> AddObjs
+        {
+            get { return addObjs; }
+            set { addObjs = value; }
+        }
+
         internal static List<GoldMine> GoldMines
         {
             get
@@ -63,6 +73,12 @@ namespace IdleGame
             {
                 goldMines = value;
             }
+        }
+
+        internal static List<Worker> Workers
+        {
+            get { return workers; }
+            set { workers = value; }
         }
 
         public GameWorld(Graphics dc, Rectangle displayRectangle)
@@ -88,12 +104,13 @@ namespace IdleGame
 
         public void SetupWorld()
         {
-            Objs.Add(new Bank("testExplosion.png", new Vector2D(0,0)));
+            bank = new Bank("testExplosion.png", new Vector2D(0,0));
+            Objs.Add(bank);
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 1, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 2, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 3, 500));
             Objs.Add(new GoldMine("Mine.png", new Vector2D(-200, 0), 4, 500));
-            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0)));
+            Objs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
         }
 
         public void GoldMineNumberReset(GoldMine removed)
@@ -109,6 +126,7 @@ namespace IdleGame
                 }
             }
         }
+
         public void GameLoop()
         {
             int j = RemoveObjs.Count;
@@ -122,6 +140,12 @@ namespace IdleGame
                 Objs.Remove(RemoveObjs[i]);
             }
             RemoveObjs.Clear();
+            int k = AddObjs.Count;
+            for (int i = 0; i < k; i++)
+            {
+                Objs.Add(AddObjs[i]);
+            }
+            AddObjs.Clear();
             DateTime startTime = DateTime.Now;
             TimeSpan deltaTime = startTime - endTime;
             deltaTime2 = deltaTime2 + deltaTime;
@@ -150,6 +174,7 @@ namespace IdleGame
                 }
             }
             threads.Clear();
+            goldMines[0].GoldDeposit = 5000000;
         }
 
         public void Draw()
@@ -161,9 +186,10 @@ namespace IdleGame
                 gameObject.Draw(dc);
             }
             Font f = new Font("Arial", 16);
-            dc.DrawString("Gold: " + gold, f, Brushes.Black, 100,5);
+            dc.DrawString("Gold: " + bank.Gold, f, Brushes.Black, 100,5);
 #if DEBUG
             dc.DrawString(" " + currentFPS, f, Brushes.Black, 0, 0);
+            dc.DrawString(debug, f, Brushes.Black, 0, 20);
 #endif
             try
             {

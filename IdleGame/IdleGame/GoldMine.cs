@@ -25,6 +25,12 @@ namespace IdleGame
             }
         }
 
+        public int GoldDeposit
+        {
+            get { return goldDeposit; }
+            set { goldDeposit = value; }
+        }
+
         public GoldMine(string imagePath, Vector2D startPosition, int number, int goldDeposit) : base(imagePath, startPosition)
         {
             this.Number = number;
@@ -38,27 +44,28 @@ namespace IdleGame
             
         }
 
-        public override void OnCollision(GameObject other)
-        {
-
-        }
-
-
         public int Mining(int amount)
         {
             lock (mineLock)
             {
-                if (amount <= goldDeposit)
+                if (amount < goldDeposit)
                 {
-                    Thread.Sleep(10000);
+                    Thread.Sleep(5000);
                     goldDeposit = goldDeposit - amount;
                     return amount;
                 }
-                else
+                else if (goldDeposit > 0)
                 {
+                    Thread.Sleep(5000);
                     int maxAmount = goldDeposit;
                     goldDeposit = goldDeposit - maxAmount;
+                    GameWorld.RemoveObjs.Add(this);
                     return maxAmount;
+                }
+                else
+                {
+                    Thread.Sleep(1000);
+                    return 0;
                 }
             }
         }
@@ -81,8 +88,6 @@ namespace IdleGame
             dc.DrawImage(sprite, 0 - sprite.Width / 2, 0 - sprite.Height / 2, sprite.Width, sprite.Height);
             dc.DrawRectangle(new Pen(Brushes.Red), 0 - sprite.Width / 2, 0 - sprite.Height / 2, CollisionBox.Width, CollisionBox.Height);
             dc.ResetTransform();
-
-
         }
 
     }
