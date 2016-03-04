@@ -54,7 +54,9 @@ namespace IdleGame
         public virtual void Draw(Graphics dc)
         {
             dc.DrawImage(sprite, position.X, position.Y, sprite.Width, sprite.Height);
+#if DEBUG
             dc.DrawRectangle(new Pen(Brushes.Red), CollisionBox.X, CollisionBox.Y, CollisionBox.Width, CollisionBox.Height);
+#endif
         }
     }
 }
