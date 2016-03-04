@@ -52,7 +52,7 @@ namespace IdleGame
                 {
                     if((gameObject as Bank).Gold >= 100)
                     {
-                        GameWorld.AddObjs.Add(new GoldMine("mine.png", new Vector2D(-200, 0), number, 500));
+                        GameWorld.AddObjs.Add(new GoldMine("sprite/mine.png", new Vector2D(-200, 0), number, 500));
                         (gameObject as Bank).Gold -= 100;
                     }
                 }
@@ -67,7 +67,7 @@ namespace IdleGame
                 {
                     if((gameObject as Bank).Gold >= 250)
                     {
-                        GameWorld.AddObjs.Add(new Worker("testPlayer.png", new Vector2D(0, 0), 50));
+                        GameWorld.AddObjs.Add(new Worker("sprite/WorkerFrontSprite1.png;sprite/WorkerFrontSprite2.png;sprite/WorkerSpriteFront3.png", new Vector2D(0, 0), 50));
                         (gameObject as Bank).Gold -= 250;
                     }
                 }
