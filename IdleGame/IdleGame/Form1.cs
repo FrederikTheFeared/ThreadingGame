@@ -73,5 +73,20 @@ namespace IdleGame
                 }
             }
         }
+
+        private void pictureBox3_Click(object sender, EventArgs e)
+        {
+            foreach (GameObject gameObject in GameWorld.Objs)
+            {
+                if (gameObject is Bank)
+                {
+                    if ((gameObject as Bank).Gold >= 700)
+                    {
+                        GameWorld.AddObjs.Add(new Worker("sprite/WorkerFrontSprite1.png;sprite/WorkerFrontSprite2.png;sprite/WorkerSpriteFront3.png", new Vector2D(0, 0), 250));
+                        (gameObject as Bank).Gold -= 700;
+                    }
+                }
+            }
+        }
     }
 }
