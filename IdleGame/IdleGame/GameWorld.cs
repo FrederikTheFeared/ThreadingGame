@@ -164,6 +164,11 @@ namespace IdleGame
 
         public void Update(float fps)
         {
+            int goldmines = GoldMines.Count;
+            for (int i = 0; i < goldmines; i++)
+            {
+                GoldMines[i].Update(fps);
+            }
             if (FinishedThreads >= threads.Count)
             {
                 foreach (GameObject obj in objs)

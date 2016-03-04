@@ -12,6 +12,7 @@ namespace IdleGame
         private Object mineLock = new Object();
         private int number;
         private int goldDeposit;
+        private bool updateBool = true;
         public int Number
         {
             get
@@ -59,7 +60,6 @@ namespace IdleGame
                     Thread.Sleep(5000);
                     int maxAmount = goldDeposit;
                     goldDeposit = goldDeposit - maxAmount;
-                    GameWorld.RemoveObjs.Add(this);
                     return maxAmount;
                 }
                 else
@@ -71,11 +71,14 @@ namespace IdleGame
         }
         public override void Update(float currentFPS)
         {
-            if (goldDeposit == 0)
+            if (updateBool)
             {
-                GameWorld.RemoveObjs.Add(this);
+                if (goldDeposit == 0)
+                {
+                    GameWorld.RemoveObjs.Add(this);
+                    updateBool = false;
+                }
             }
-            base.Update(currentFPS);
         }
 
         public override void Draw(Graphics dc)
